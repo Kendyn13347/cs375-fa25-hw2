@@ -1,0 +1,28 @@
+1. Which addresses ae defined in the executable?
+_main is found in the .text section
+recur is also found in the .text section 
+static data is found in the .data section 
+
+2. Make a list of the important segments, and what they are used for.
+      .text → Machine instructions for functions like _main, recur, etc. (read-only, executable).
+      .data → Statically allocated, initialized global variables (like stuff = 7).
+      .bss → Statically allocated, uninitialized or zero-initialized variables (like int foo;).
+      Heap → Dynamically allocated memory returned by malloc().
+      Stack → Function call frames, local variables, return addresses, and arguments.
+
+3. What direction is the stack growing in?
+
+    The stack is growing downward.
+
+4. How large is the stack frame for each recursive call?
+
+    The stack fram size is about 48 bytes per recursive call
+
+5. Where is the heap? What direction is it growing in?
+
+    The heap address is printed by malloc and its growing upward
+
+6. Are the two malloc()ed memory areas contiguous?
+    Yes.
+    0x671080 - 0x671010 = 0x70 (112 bytes), which is slightly larger than the requested 100 bytes. The extra space is allocator overhead (bookkeeping + alignment).
+    So they are effectively contiguous, but not back-to-back — the runtime memory allocator inserts padding.
